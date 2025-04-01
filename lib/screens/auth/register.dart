@@ -1,14 +1,20 @@
 //kayıt ekranım
 import 'package:flutter/material.dart';
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('register.dart'),
-    ),
-    body: Center( // Ekranın ortasına yerleştirmek için Center kullanıyorsun
-      child: Text("kayit Ekranim"), // Text widget'ını buraya ekliyorsun
-    ),
-  );
+class RegisterScreen extends StatefulWidget {
+  const RegisterScreen({super.key});
+
+  @override
+  _RegisterScreenState createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("Kayıt Ekranım"),
+      ),
+    );
+  }
 }

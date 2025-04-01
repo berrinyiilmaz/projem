@@ -1,14 +1,20 @@
-//dashboard ekranım 
 import 'package:flutter/material.dart';
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Login Screen'),
-    ),
-    body: Center( // Ekranın ortasına yerleştirmek için Center kullanıyorsun
-      child: Text("dashboard ekranım"), // Text widget'ını buraya ekliyorsun
-    ),
-  );
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen({super.key});
+
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
 }
+
+class _DashboardScreenState extends State<DashboardScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("Dashboard Ekranım"),
+      ),
+    );
+  }
+}
+

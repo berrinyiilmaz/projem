@@ -1,14 +1,20 @@
 //şifremi unuttum ekranım
 import 'package:flutter/material.dart';
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('forget.password Screen'),
-    ),
-    body: Center( // Ekranın ortasına yerleştirmek için Center kullanıyorsun
-      child: Text("sifremi unuttum ekranım"), // Text widget'ını buraya ekliyorsun
-    ),
-  );
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({super.key});
+
+  @override
+  _ForgetPasswordScreenState createState() => _ForgetPasswordScreenState();
 }
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text("Forget Password Ekranım"),
+      ),
+    );
+  }
+}  
