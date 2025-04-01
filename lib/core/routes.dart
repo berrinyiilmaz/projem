@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../screens/auth/login.dart';         // LoginScreen
 import '../screens/auth/register.dart';     // RegisterScreen
-import '../screens/auth/forget.password.dart'; // ForgetPasswordScreen
+import '../screens/auth/forget_password.dart'; // ForgetPasswordScreen
 import '../screens/client/profile.dart';     // ProfileScreen
 import '../screens/dashboard/dashboard.dart'; // DashboardScreen
 import '../screens/auth/home.dart';
@@ -34,5 +33,5 @@ final router = GoRouter(
       path: '/home',
       builder: (context, state) => const HomeScreen(),
     ),
-    ],
+  ],
 );
