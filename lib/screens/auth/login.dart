@@ -1,36 +1,26 @@
-//giriş ekranım
 import 'package:flutter/material.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const LoginScreen(),
-    );
-  }
-}
+import 'package:go_router/go_router.dart';
+import '../../core/localizations.dart';
+import '../../widgets/footer.dart';
+import '../../widgets/header.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Color(0xFF1A2526), // Üst kısım
-              Color(0xFF0A1516), // Alt kısım
+              colorScheme.surfaceDim, // Top gradient
+              colorScheme.surface, // Bottom gradient
             ],
           ),
         ),
@@ -39,14 +29,14 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Üst kısım: Başlık ve ikon
                 Column(
                   children: [
-                    const SizedBox(height: 20), // Üstten boşluk
-                    const Text(
-                      'KONTROL SİSTEMİ',
+                    HeaderWidget(title: localizations.getTranslate('login')),
+                    const SizedBox(height: 20),
+                    Text(
+                      localizations.getTranslate('control_system'),
                       style: TextStyle(
-                        color: Color.fromARGB(255, 244, 243, 243),
+                        color: colorScheme.onSurface,
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 1.2,
@@ -56,76 +46,90 @@ class LoginScreen extends StatelessWidget {
                     Icon(
                       Icons.person,
                       size: 80,
-                      color: const Color(0xFFB0BEC5), // Gri ikon
+                      color: colorScheme.secondary,
                     ),
                     const SizedBox(height: 50),
-                    // Giriş alanları
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 40),
                       child: Column(
                         children: [
                           TextField(
-                            style: const TextStyle(color: Color(0xFFFFFFFF)),
+                            style: TextStyle(color: colorScheme.onSurface),
                             decoration: InputDecoration(
-                              hintText: 'Kullanıcı Adı',
-                              hintStyle: const TextStyle(
-                                color: Color(0xB3FFFFFF), // Opak beyaz
+                              hintText: localizations.getTranslate('username'),
+                              hintStyle: TextStyle(
+                                color: colorScheme.onSurface.withOpacity(0.7),
                                 fontSize: 16,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFFFC107), // Sarı kenar
+                                borderSide: BorderSide(
+                                  color: colorScheme.outline,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFFFC107),
+                                borderSide: BorderSide(
+                                  color: colorScheme.primary,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               filled: true,
-                              fillColor: const Color.fromARGB(255, 0, 1, 7)
-                                  .withOpacity(0.6), // Siyah arka plan
+                              fillColor: colorScheme.surfaceContainer,
                             ),
                           ),
                           const SizedBox(height: 20),
                           TextField(
-                            style: const TextStyle(color: Color(0xFFFFFFFF)),
+                            style: TextStyle(color: colorScheme.onSurface),
                             obscureText: true,
                             decoration: InputDecoration(
-                              hintText: 'Şifre',
-                              hintStyle: const TextStyle(
-                                color: Color(0xB3FFFFFF),
+                              hintText: localizations.getTranslate('password'),
+                              hintStyle: TextStyle(
+                                color: colorScheme.onSurface.withOpacity(0.7),
                                 fontSize: 16,
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFFFC107),
+                                borderSide: BorderSide(
+                                  color: colorScheme.outline,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               focusedBorder: OutlineInputBorder(
-                                borderSide: const BorderSide(
-                                  color: Color(0xFFFFC107),
+                                borderSide: BorderSide(
+                                  color: colorScheme.primary,
                                   width: 2,
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               filled: true,
-                              fillColor: const Color.fromARGB(255, 0, 1, 7)
-                                  .withOpacity(0.6),
+                              fillColor: colorScheme.surfaceContainer,
                             ),
                           ),
-                          const SizedBox(height: 30),
-                          // Giriş Yap butonu
+                          const SizedBox(height: 10),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {
+                                context.go('/forget-password');
+                              },
+                              child: Text(
+                                localizations.getTranslate('forget_password'),
+                                style: TextStyle(
+                                  color: colorScheme.primary,
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
                           ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              context.go('/dashboard');
+                            },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFFC107), // Sarı
+                              backgroundColor: colorScheme.primary,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 60,
                                 vertical: 15,
@@ -134,10 +138,38 @@ class LoginScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            child: const Text(
-                              'Giriş Yap',
+                            child: Text(
+                              localizations.getTranslate('login'),
                               style: TextStyle(
-                                color: Color(0xFF000000),
+                                color: colorScheme.onPrimary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () {
+                              context.go('/register');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 60,
+                                vertical: 15,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: BorderSide(
+                                  color: colorScheme.primary,
+                                  width: 2,
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              localizations.getTranslate('register'),
+                              style: TextStyle(
+                                color: colorScheme.primary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
                               ),
@@ -148,32 +180,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                // Alt kısım: Turkish Ground Services ve TGS
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 30),
-                  child: Column(
-                    children: [
-                      Text(
-                        'TURKISH GROUND SERVICES',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 12,
-                          letterSpacing: 1.5,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'TGS',
-                        style: TextStyle(
-                          color: Color(0xFFFFFFFF),
-                          fontSize: 20,
-                          fontWeight: FontWeight.w900,
-                          letterSpacing: 2,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const FooterWidget(),
               ],
             ),
           ),
@@ -182,5 +189,3 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
-
-           
